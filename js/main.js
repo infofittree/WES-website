@@ -191,33 +191,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 
-  // Optimized 3D card tilt on hover (cached geometry + rAF throttling)
+  // Dynamic 3D card tilt on hover with enhanced response for smaller cards
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.service-card, .equip-card').forEach(card => {
-      let rect = null;
-      let ticking = false;
+    const tiltGroups = [
+      { selector: '.highlight-card', maxTilt: 12, translateY: -12, scale: 1.025 },
+      { selector: '.stat-card', maxTilt: 10, translateY: -10, scale: 1.02 },
+      { selector: '.service-card', maxTilt: 7, translateY: -8, scale: 1.01 },
+      { selector: '.equip-card', maxTilt: 7, translateY: -8, scale: 1.01 }
+    ];
 
-      card.addEventListener('mouseenter', () => {
-        rect = card.getBoundingClientRect();
-        card.style.transitionProperty = 'box-shadow, border-color';
-      }, { passive: true });
+    tiltGroups.forEach(group => {
+      document.querySelectorAll(group.selector).forEach(card => {
+        let rect = null;
+        let ticking = false;
 
-      card.addEventListener('mousemove', (e) => {
-        if (!rect || ticking) return;
-        ticking = true;
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        requestAnimationFrame(() => {
-          card.style.transform = `perspective(1000px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-8px)`;
-          ticking = false;
-        });
-      }, { passive: true });
+        card.addEventListener('mouseenter', () => {
+          rect = card.getBoundingClientRect();
+          card.style.transition = 'transform 0.1s ease-out, box-shadow 0.25s ease';
+          card.style.willChange = 'transform';
+        }, { passive: true });
 
-      card.addEventListener('mouseleave', () => {
-        rect = null;
-        card.style.transitionProperty = '';
-        card.style.transform = '';
-      }, { passive: true });
+        card.addEventListener('mousemove', (e) => {
+          if (!rect || ticking) return;
+          ticking = true;
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          requestAnimationFrame(() => {
+            const rotX = (y * -group.maxTilt).toFixed(2);
+            const rotY = (x * group.maxTilt).toFixed(2);
+            card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(${group.translateY}px) scale(${group.scale})`;
+            ticking = false;
+          });
+        }, { passive: true });
+
+        card.addEventListener('mouseleave', () => {
+          rect = null;
+          card.style.transition = 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease';
+          card.style.transform = '';
+          card.style.willChange = 'auto';
+        }, { passive: true });
+      });
     });
   }
 

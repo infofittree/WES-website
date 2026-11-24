@@ -1089,6 +1089,19 @@ header.scrolled::after {
   background: var(--gradient-primary);
   color: var(--white);
   box-shadow: 0 10px 24px -6px rgba(14, 79, 60, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.highlight-card .icon i {
+  color: #ffffff !important;
+  font-size: 1.55rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.35s ease;
+}
+.highlight-card:hover .icon i {
+  transform: scale(1.18);
 }
 .highlight-card:hover {
   box-shadow: 0 24px 48px -12px rgba(14, 79, 60, 0.15);
