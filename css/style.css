@@ -595,10 +595,20 @@ nav a:hover { color: var(--primary); }
   overflow: hidden;
   background: var(--bg-soft);
 }
+.service-card .card-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.service-card .card-media picture img,
 .service-card .card-media img {
-  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform var(--transition);
 }
+.service-card:hover .card-media picture img,
 .service-card:hover .card-media img { transform: scale(1.08); }
 .service-card .media-overlay {
   position: absolute; inset: 0;
@@ -1021,14 +1031,31 @@ header.scrolled::after {
 }
 .featured-card .card-media {
   height: 100%;
-  min-height: 300px;
+  min-height: 320px;
   border-radius: 0;
+  aspect-ratio: auto;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.featured-card .card-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.featured-card .card-media picture img,
+.featured-card .card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .featured-card .service-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px 48px;
+  min-width: 0;
 }
 .featured-card .service-body h3 {
   font-size: 1.6rem;
