@@ -16,7 +16,7 @@ This repository is built with 100% static web technologies and is pre-configured
    - **Branch**: Select `main` (or `master`) and folder `/ (root)`.
    - Click **Save**.
 3. Within 1–2 minutes, your website will be live at:
-   `https://<your-username>.github.io/<repo-name>/`
+   `https://<your-username>.github.io/WES-website/`
 
 ---
 
