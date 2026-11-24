@@ -1,0 +1,13 @@
+# Dependencies & OS junk
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# Editor directories
+.vscode/
+.idea/
+
+# Internal automation / test scripts
+capture_*.js
+node_modules/
