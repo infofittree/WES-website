@@ -6,15 +6,15 @@
   <title>Page Not Found | Westmount Energy Solutions</title>
   <link rel="stylesheet" href="css/style.css">
   <script>
-    // Smart extensionless URL router for GitHub Pages
+    // Universal extensionless URL router for GitHub Pages and Hostinger
     (function() {
       var path = window.location.pathname;
-      // If path ends without .html and isn't root, try redirecting to [path].html
+      var base = path.startsWith('/WES-website') ? '/WES-website/' : '/';
       var knownPages = ['about', 'services', 'equipment', 'process', 'contact'];
       for (var i = 0; i < knownPages.length; i++) {
         var page = knownPages[i];
         if (path.endsWith('/' + page) || path.endsWith('/' + page + '/')) {
-          window.location.replace('/WES-website/' + page + '.html');
+          window.location.replace(base + page + '.html');
           return;
         }
       }
@@ -48,7 +48,7 @@
     <p style="color: var(--gray); max-width: 480px; margin-bottom: 28px;">
       The page you're looking for doesn't exist or may have been typed with different capitalization.
     </p>
-    <a href="/WES-website/" class="btn btn-primary">Return to Homepage</a>
+    <a href="index.html" class="btn btn-primary">Return to Homepage</a>
   </div>
 </body>
 </html>
